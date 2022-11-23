@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>遲來的Todolist~</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    <div id="app">
+        <h2>To Do List</h2>
+        <div class="add">
+            <input type="text" autocomplete="off" placeholder="Add task" class="task-input" v-model="tasks.name" @keyup.inter="newItem">
+            <input type="submit" class="task-submit" title="add task" value="+" @click="newItem">
+        </div>
+
+        <ul class="task-list">
+            <li class="task-list-item" v-for="tasks in tasks">
+                <label class="task-list-item-label">
+                    <input type="checkbox">
+                    <span>{{task.name}}</span>
+                </label>
+                <span class="delete-btn" title="Delete Task" @click="delItm(task)">{{tasks.del}}</span>
+            </li>
+        </ul>
+    </div>
+    <script src="https://unpkg.com/vue@next"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+
+    <script>
+         Vue.createApp({
+            data(){
+                return{
+                   title: 'to do list', 
+                   tasks:[
+                    {name: 'to do list' , del:'x'},
+                    {name: '456', del:'x'},
+                    {name: '123', del:'x'},
+                   ]
+                }
+            },
+            methods:{
+                    newItem: function(){
+                        if(!this.tasks.name){
+                            return
+                        }
+                        this.tasks.push({
+                            name: this.tasks.name,
+                            del: 'x'
+                        });
+                        this.tasks.name = '';
+                    },
+                    delItem: function(task){
+                        this.tasks.splice(this.tasks.indexOf(task), 1)
+                    }
+                }
+         })
+         
+          
+    </script>
+</body>
+</html>
+<style>
+    * {
+        box-sizing: border-box;
+    }
+    body{
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-image: url(https://www.bizhi3.com/uploads/202203/19/220319104336886.jpg);
+    }
+    #app {
+        width: 500px;
+        margin:0 auto;
+        padding: 25px;
+        overflow: auto;
+        border-radius: 15px;
+        backdrop-filter: blur(1px);
+        background-color: rgba(255, 255, 255, 0.475);
+    }
+    
+    h2{
+        font-size: 30px;
+        text-align: center;
+        padding: 15px;
+        color: #fff;
+    }
+
+    input {
+        outline: none;
+    }
+    ul {
+        list-style: none;
+        padding: 0;
+    }
+    .task-submit {
+        width: 25px;
+        height: 25px;
+        margin-top: 15px;
+        border: none;
+        color: #fff;
+        font-size: 21px;
+        font-weight: 700;
+        cursor: pointer;
+        background-color: rgb(115, 110, 208);
+        border-radius: 100%;
+    }
+    .add {
+        height: 40px;
+        font-size: 15px;
+        display: flex;
+    }
+    .task-input{
+        width: 100%;
+        padding: 0 5px;
+        outline: none;
+        border: none;
+        border-bottom: 0.5px solid #fff;
+        background-color: transparent;
+        margin-right: 15px;
+    }
+    .task-input::placeholder{
+        color: rgb(57, 57, 57);
+    }
+    .task-list-item {
+        background-color: rgba(69, 64, 141, 0.16);
+        padding: 8px;
+        display: flex;
+        border-radius: 6px;
+        color: #fff;
+        font-size: 20px;
+    }
+    .task-list-item input {
+        width: 16px;
+        height: 16px;
+        transition: 0.4s;
+        appearance: none;
+        background-color: #fff;
+    }
+
+    .task-list-item input:hover {
+        background-color: rgba(100, 64, 141, 0.27);
+        border: 1px solid #fff;
+    }
+    .task-list-item input:checked{
+        color: #fff;
+        background-size: 10px;
+        border: 1px solid rgb(255, 255, 255);
+        background-color: rgb(69, 64, 141);
+    }
+    
+    .task-list-item-label {
+        display: flex;
+        align-items: flex-start;
+        color: #fff;
+        position: relative;
+        transition: 0.4s;
+        cursor: pointer;
+    }
+    .task-list-item-label:hover {
+        color: rgb(51, 39, 145);
+    }
+    .delete-btn{
+        margin-left: auto;
+        margin-right: 5px;
+        display: block;
+        width: 15px;
+        height: 15px;
+        cursor: pointer;
+    }
+    .delete-btn:hover {
+        color: rgb(51, 39, 145);
+    }
+    
+</style>
