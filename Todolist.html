@@ -21,7 +21,7 @@
                     <input type="checkbox">
                     <span>{{task.name}}</span>
                 </label>
-                <span class="delete-btn" title="Delete Task" @click="delItm(task)">{{tasks.del}}</span>
+                <span class="delete-btn" title="Delete Task" @click="delItm(task)">{{task.del}}</span>
             </li>
         </ul>
     </div>
@@ -33,11 +33,13 @@
             data(){
                 return{
                    title: 'to do list', 
-                   tasks:[
+                   tasks: [
                     {name: 'to do list' , del:'x'},
                     {name: '456', del:'x'},
                     {name: '123', del:'x'},
                    ]
+                    
+                   
                 }
             },
             methods:{
@@ -55,7 +57,7 @@
                         this.tasks.splice(this.tasks.indexOf(task), 1)
                     }
                 }
-         })
+         }).mount('#app')
          
           
     </script>
