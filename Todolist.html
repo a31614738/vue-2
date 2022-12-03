@@ -8,38 +8,37 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
-    <div id="app">
-        <h2>To Do List</h2>
+    <div id="app" id="tasklist">
+        <h1>To Do List</h1>
+
         <div class="add">
-            <input type="text" autocomplete="off" placeholder="Add task" class="task-input" v-model="tasks.name" @keyup.inter="newItem">
-            <input type="submit" class="task-submit" title="add task" value="+" @click="newItem">
+            <input type="text" autocomplete="off" placeholder="Add New Task" v-model="tasks.name" @keyup.inter="newItem" class="task-input">
+            <input type="submit" title="Add Task" @click="newItem" value="+" class="submit">
         </div>
 
         <ul class="task-list">
-            <li class="task-list-item" v-for="tasks in tasks">
+            <li class="task-list-item" v-for="task in tasks">
                 <label class="task-list-item-label">
                     <input type="checkbox">
                     <span>{{task.name}}</span>
                 </label>
-                <span class="delete-btn" title="Delete Task" @click="delItm(task)">{{task.del}}</span>
+                <span class="delete-btn" title="Delete Task" @click="delItem(task)">{{task.del}}</span>
             </li>
         </ul>
     </div>
-    <script src="https://unpkg.com/vue@next"></script>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
 
+    <script src="https://unpkg.com/vue@next"></script>
     <script>
-         Vue.createApp({
+
+        Vue.createApp({
             data(){
                 return{
                    title: 'to do list', 
-                   tasks: [
-                    {name: 'to do list' , del:'x'},
-                    {name: '456', del:'x'},
-                    {name: '123', del:'x'},
+                   tasks:[
+                    {name: 'Vue3 practice' , del:'x'},
+                    {name: 'writing use case', del:'x'},
+                    {name: 'go to the gym', del:'x'},
                    ]
-                    
-                   
                 }
             },
             methods:{
@@ -57,9 +56,7 @@
                         this.tasks.splice(this.tasks.indexOf(task), 1)
                     }
                 }
-         }).mount('#app')
-         
-          
+        }).mount('#app')
     </script>
 </body>
 </html>
@@ -102,7 +99,7 @@
         list-style: none;
         padding: 0;
     }
-    .task-submit {
+    .submit {
         width: 25px;
         height: 25px;
         margin-top: 15px;
@@ -129,7 +126,7 @@
         margin-right: 15px;
     }
     .task-input::placeholder{
-        color: rgb(57, 57, 57);
+        color: rgb(86, 86, 86);
     }
     .task-list-item {
         background-color: rgba(69, 64, 141, 0.16);
