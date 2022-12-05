@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>變色練習</title>
+</head>
+<style>
+    .news {
+        text-align: center;
+        padding: 4rem;
+        background-color: #ccc;
+    }
+
+    button {
+        color: #000;
+        padding: 0.5rem 1rem;
+    }
+</style>
+
+<body>
+    <script src="https://unpkg.com/vue@next"></script>
+    <div id="app">
+        <div class="news" :style="{backgroundColor:active}">
+            <img src="./body_01_black.png" alt="img">
+            <button v-for="i in colors" :key="i" @click="changeColor(i)">{{i}}</button>
+        </div>
+    </div>
+    <script>
+    
+        Vue.createApp({
+            data() {
+                return {
+                    colors: ['#777', '#666', '#333', '#555', '#999'],
+                    active: ''
+                }
+            },
+            methods: {
+                changeColor(color) {
+                    this.active = color
+                }
+            }
+        }).mount('#app')
+    </script>
+</body>
+
+</html>
