@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>all checkbox</title>
+</head>
+<body>
+    <div id="app">
+        <!-- 有參考17佳政同學(那個code超強的同學)的作業照著打並試著理解發現毫無作用QQ -->
+        <h1>all checkbox</h1>
+        <div class="todo-box">
+            <div class="todo-lists" v-for="(todo,index) in todos" :key="todo.id">
+                <input type="checkbox":value="todo" id="todo-item" v-model="dones">
+                <label :class="{done:todo.done}" for="todo-item">{{todo.do}}</label>
+            </div>
+            <!-- 這部份有去看影片 但還是不理解為啥要用OrClear -->
+            <button @click="selectOrClearAll">{{showSelectOrClear}} All</button>
+            <p>已選擇{{showSelectNum}}項</p>
+        </div>
+    </div>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script type="module">
+        // 不太理解這部分為何要添加這行,網路說:
+        // Uuid：在 JavaScript 中生成符合 RFC 的 UUID
+        import { v4 as uuid } from 'https://jspm.dev/uuid';
+        Vue.createApp({
+            data() {
+                return {
+                    todos: [{ id: uuid(), do: '我想哭', done: false },
+                    { id: uuid(), do: '人生好難', done: false },
+                    { id: uuid(), do: '為啥同學那麼強', done: false },
+                    { id: uuid(), do: '跟著打還會報錯氣死欸', done: false },
+                    { id: uuid(), do: '程式之路遙遙無期欸嗚嗚', done: false }],
+                    todoText: '',
+                    dones: [],
+                    isSelectAll: false
+                }
+            }, computed: {
+                showSelectOrClear() {
+                    return this.dones.length === this.todos.length ? 'Clear' : 'Select'
+                },
+                showSelectNum() {
+                    return this.dones.length
+                }
+            },
+            methods: {
+                selectOrClearAll() {
+                    this.isSelectAll = !this.isSelectAll
+                    if (this.isSelectAll) {
+                        this.dones = this.todos
+                    } else {
+                        this.dones = []
+                    }
+                }
+            },
+        }).mount('#app')
+    </script>
+</body>
+</html>
+
+<style>
+    
+</style>
